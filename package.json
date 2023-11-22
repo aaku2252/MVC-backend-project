@@ -1,0 +1,27 @@
+{
+    "name": "inventory_app",
+    "version": "1.0.0",
+    "description": "Inventory app",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aaku2252/MVC-backend-project.git"
+    },
+    "author": "Akash",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/aaku2252/MVC-backend-project/issues"
+    },
+    "homepage": "https://github.com/aaku2252/MVC-backend-project#readme",
+    "dependencies": {
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-ejs-layouts": "^2.5.1",
+        "nodemon": "^3.0.1"
+    }
+}
