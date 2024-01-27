@@ -2,10 +2,12 @@ import express from "express";
 import ProductController from "./src/controllers/products_controllers.js";
 import ejsLayouts from "express-ejs-layouts";
 import path from "path";
+import validateRequest from "./src/middlewares/validation.middleware.js";
 
 const server = express();
 const port = 3000;
-//parse form data
+
+// parse form data. If we dont use this then the "req.body" will be undefined.
 server.use(express.urlencoded({ extended: true }));
 
 //setup view engine
@@ -22,7 +24,7 @@ const productController = new ProductController();
 
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
-server.post("/", productController.addNewProduct);
+server.post("/", validateRequest, productController.addNewProduct);
 
 server.listen(port, () => {
     console.log(`Server is listening on ${port}`);

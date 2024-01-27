@@ -8,10 +8,13 @@ export default class ProductController {
         res.render("products.ejs", { products: products });
     }
     getAddForm(req, res) {
-        res.render("new-product.ejs");
+        res.render("new-product.ejs", { errorMessage: null });
     }
 
     addNewProduct(req, res) {
+
+    
+
         ProductModel.add(
             req.body.name,
             req.body.desc,
