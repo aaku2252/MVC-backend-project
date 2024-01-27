@@ -1,4 +1,4 @@
-<h1 class="mt-5 mb-4 header">Add New Product</h1>
+<h1 class="mt-5 mb-4 header">Update Product</h1>
 
 <% if(errorMessage){ %>
 <div
@@ -9,8 +9,17 @@
 <%}%>
 
 <form
-    action="/"
+    action="/update-product/"
     method="post">
+    <div class="mb-3">
+        <input
+            type="hidden"
+            class="form-control"
+            id="id"
+            name="id"
+            value="<%=product.id%>" />
+    </div>
+
     <div class="mb-3">
         <label
             for="name"
@@ -21,7 +30,8 @@
             type="text"
             class="form-control"
             id="name"
-            name="name" />
+            name="name"
+            value="<%=product.name%>" />
     </div>
     <div class="mb-3">
         <label
@@ -33,7 +43,9 @@
             class="form-control"
             id="desc"
             name="desc"
-            rows="3"></textarea>
+            rows="3">
+<%=product.desc%>
+        </textarea>
     </div>
     <div class="mb-3">
         <label
@@ -45,7 +57,8 @@
             type="number"
             class="form-control"
             id="price"
-            name="price" />
+            name="price"
+            value="<%=product.price%>" />
     </div>
     <div class="mb-3">
         <label
@@ -56,11 +69,12 @@
         <input
             class="form-control"
             id="imageUrl"
-            name="imageUrl" />
+            name="imageUrl"
+            value="<%=product.imageUrl%>" />
     </div>
     <button
         type="submit"
         class="btn btn-primary">
-        Add Product
+        Update Product
     </button>
 </form>

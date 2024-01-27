@@ -10,6 +10,8 @@ const port = 3000;
 // parse form data. If we dont use this then the "req.body" will be undefined.
 server.use(express.urlencoded({ extended: true }));
 
+server.use(express.static("public"));
+
 //setup view engine
 server.set("view engine", "ejs");
 server.set("views", path.join(path.resolve(), "src", "views"));
@@ -24,7 +26,10 @@ const productController = new ProductController();
 
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
+server.get("/update-product/:id", productController.getUpdateProductView);
+server.post("/delete-product/:id", productController.deleteProduct);
 server.post("/", validateRequest, productController.addNewProduct);
+server.post("/update-product", productController.postUpdateProduct);
 
 server.listen(port, () => {
     console.log(`Server is listening on ${port}`);
