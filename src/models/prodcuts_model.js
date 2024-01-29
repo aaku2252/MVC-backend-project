@@ -22,7 +22,8 @@ export default class ProductModel {
     }
     static delete(id) {
         const index = products.findIndex((p) => p.id == id);
-        products.splice(products.indexOf(index), 1);
+
+        products.splice(index, 1);
     }
 
     static getById(id) {
