@@ -6,7 +6,7 @@ import validateRequest from "./src/middlewares/validation.middleware.js";
 import { uploadFile } from "./src/middlewares/file-upload-middleware.js";
 
 const server = express();
-const port = 3500;
+const port = 3000;
 
 // parse form data. If we dont use this then the "req.body" will be undefined.
 server.use(express.urlencoded({ extended: true }));
