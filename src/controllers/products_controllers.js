@@ -12,11 +12,12 @@ export default class ProductController {
     }
 
     addNewProduct(req, res) {
+        const imageUrl = "images/" + req.file.filename;
         ProductModel.add(
             req.body.name,
             req.body.desc,
             req.body.price,
-            req.body.imageUrl
+            imageUrl
         );
         let products = ProductModel.get();
         // res.render("products.ejs", { products: products });

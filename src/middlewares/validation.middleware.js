@@ -1,21 +1,8 @@
 import { body, validationResult } from "express-validator";
+//express-validator is a package to handle validation
 
 const validateRequest = async (req, res, next) => {
-    //validate data
-    // const { name, price, imageUrl } = req.body;
-    // const errors = [];
-    // if (!name || name.trim() == "") {
-    //     errors.push("Name is required.");
-    // }
-    // if (!price || parseFloat(price) < 1) {
-    //     errors.push("Price must be a positive value.");
-    // }
-    // try {
-    //     //If the url is invalid, then it throws an TypeError
-    //     const validUrl = new URL(imageUrl);
-    // } catch (err) {
-    //     errors.push("Image URL is invalid");
-    // }
+    console.log(req.body);
 
     //validate data using express validator
 
@@ -26,6 +13,12 @@ const validateRequest = async (req, res, next) => {
             .isFloat({ gt: 0 })
             .withMessage("Price should be a positive value."),
         body("imageUrl")
+            .custom((value, { req }) => {
+                if (!req.file) {
+                    throw new Error("Image is required.");
+                }
+                return true;
+            })
             .isURL()
             .withMessage("Image URL should be a valid URL."),
     ];
