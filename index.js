@@ -27,7 +27,7 @@ const productController = new ProductController();
 
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
-server.get("/update-product/:id",uploadFile.single("imageUrl"), productController.getUpdateProductView);
+server.get("/update-product/:id", productController.getUpdateProductView);
 server.post("/delete-product/:id", productController.deleteProduct);
 server.post(
     "/",
@@ -36,7 +36,11 @@ server.post(
     productController.addNewProduct
 );
 
-server.post("/update-product", productController.postUpdateProduct);
+server.post(
+    "/update-product",
+    uploadFile.single("imageUrl"),
+    productController.postUpdateProduct
+);
 
 server.listen(port, () => {
     console.log(`Server is listening on ${port}`);

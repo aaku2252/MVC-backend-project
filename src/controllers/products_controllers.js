@@ -5,6 +5,7 @@ export default class ProductController {
     getProducts(req, res) {
         let products = ProductModel.get();
         //we can also use --> res.render("products", { products: products });
+
         res.render("products.ejs", { products: products });
     }
     getAddForm(req, res) {
@@ -38,7 +39,8 @@ export default class ProductController {
         }
     }
     postUpdateProduct(req, res) {
-        ProductModel.update(req.body);
+        const imageUrl = "images/" + req.file.filename;
+        ProductModel.update(req.body, imageUrl);
         let products = ProductModel.get();
         res.redirect("/");
     }

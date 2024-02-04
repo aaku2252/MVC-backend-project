@@ -9,10 +9,16 @@ export default class ProductModel {
     static get() {
         return products;
     }
-    static update(productObj) {
+    static update(productObj, imageUrl) {
         const index = products.findIndex((p) => p.id == productObj.id);
-
-        products[index] = productObj;
+        console.log(productObj.id);
+        products[index] = new ProductModel(
+            productObj.id,
+            productObj.name,
+            productObj.desc,
+            productObj.price,
+            imageUrl
+        );
     }
 
     static add(name, desc, price, imageUrl) {

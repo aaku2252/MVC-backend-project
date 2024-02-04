@@ -2,7 +2,7 @@ import { body, validationResult } from "express-validator";
 //express-validator is a package to handle validation
 
 const validateRequest = async (req, res, next) => {
-    console.log(req.body);
+    console.log("From validation middleware", req.body);
 
     //validate data using express validator
 
@@ -19,7 +19,6 @@ const validateRequest = async (req, res, next) => {
                 }
                 return true;
             })
-            .isURL()
             .withMessage("Image URL should be a valid URL."),
     ];
     //2. run those rules
