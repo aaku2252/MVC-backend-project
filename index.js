@@ -27,7 +27,7 @@ const productController = new ProductController();
 
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
-server.get("/update-product/:id", productController.getUpdateProductView);
+server.get("/update-product/:id",uploadFile.single("imageUrl"), productController.getUpdateProductView);
 server.post("/delete-product/:id", productController.deleteProduct);
 server.post(
     "/",
