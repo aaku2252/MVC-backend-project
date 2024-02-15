@@ -4,6 +4,7 @@ import ejsLayouts from "express-ejs-layouts";
 import path from "path";
 import validateRequest from "./src/middlewares/validation.middleware.js";
 import { uploadFile } from "./src/middlewares/file-upload-middleware.js";
+import userController from "./src/controllers/user_controller.js";
 
 const server = express();
 const port = 3000;
@@ -22,6 +23,7 @@ server.use(ejsLayouts);
 
 //setup controllers
 const productController = new ProductController();
+const user_Controller = new userController();
 
 //access to all the files in views folder. we are using this only to access the css file   ---->>  server.use(express.static("src/views"));
 
@@ -35,6 +37,10 @@ server.post(
     validateRequest,
     productController.addNewProduct
 );
+server.get("/register", user_Controller.getRegister);
+server.get("/login", user_Controller.getLogin);
+server.post("/register", user_Controller.postRegister);
+server.post("/login", user_Controller.userLogin);
 
 server.post(
     "/update-product",
