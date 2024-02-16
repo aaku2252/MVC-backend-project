@@ -5,13 +5,22 @@ import path from "path";
 import validateRequest from "./src/middlewares/validation.middleware.js";
 import { uploadFile } from "./src/middlewares/file-upload-middleware.js";
 import userController from "./src/controllers/user_controller.js";
+import session from "express-session";
+import { auth } from "./src/middlewares/auth_middleware.js";
 
 const server = express();
 const port = 3000;
 
 // parse form data. If we dont use this then the "req.body" will be undefined.
 server.use(express.urlencoded({ extended: true }));
-
+server.use(
+    session({
+        secret: "secretKey",
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false },
+    })
+);
 server.use(express.static("public"));
 
 //setup view engine
@@ -27,12 +36,12 @@ const user_Controller = new userController();
 
 //access to all the files in views folder. we are using this only to access the css file   ---->>  server.use(express.static("src/views"));
 
-server.get("/", productController.getProducts);
-server.get("/new", productController.getAddForm);
-server.get("/update-product/:id", productController.getUpdateProductView);
-server.post("/delete-product/:id", productController.deleteProduct);
+server.get("/", auth, productController.getProducts);
+server.get("/new", auth, productController.getAddForm);
+server.get("/update-product/:id",auth, productController.getUpdateProductView);
+server.post("/delete-product/:id", auth, productController.deleteProduct);
 server.post(
-    "/",
+    "/",auth,
     uploadFile.single("imageUrl"),
     validateRequest,
     productController.addNewProduct
@@ -43,7 +52,7 @@ server.post("/register", user_Controller.postRegister);
 server.post("/login", user_Controller.userLogin);
 
 server.post(
-    "/update-product",
+    "/update-product",auth,
     uploadFile.single("imageUrl"),
     productController.postUpdateProduct
 );

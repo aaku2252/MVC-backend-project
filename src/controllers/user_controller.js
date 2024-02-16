@@ -16,6 +16,7 @@ export default class userController {
     userLogin(req, res) {
         const { email, password } = req.body;
         if (UserModel.loginUser(email, password)) {
+            req.session.userEmail = email;
             res.redirect("/");
         } else {
             res.render("login.ejs", {

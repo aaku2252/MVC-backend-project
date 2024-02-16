@@ -1,4 +1,15 @@
-.header{
+.header {
     background-color: darkorchid;
     color: lightgoldenrodyellow;
+}
+body {
+    background-image: linear-gradient(
+        to right,
+        coral,
+        33%,
+        #c5a5c3,
+        66%,
+        #e75fc3
+    );
+    font-family: monospace;
 }
