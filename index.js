@@ -7,6 +7,8 @@ import { uploadFile } from "./src/middlewares/file-upload-middleware.js";
 import userController from "./src/controllers/user_controller.js";
 import session from "express-session";
 import { auth } from "./src/middlewares/auth_middleware.js";
+import cookieParser from "cookie-parser";
+import { setLastVisit } from "./src/middlewares/lastVisit-middleware.js";
 
 const server = express();
 const port = 3000;
@@ -29,6 +31,7 @@ server.set("views", path.join(path.resolve(), "src", "views"));
 
 //use express middleware- ejslayouts
 server.use(ejsLayouts);
+server.use(cookieParser());
 
 //setup controllers
 const productController = new ProductController();
@@ -36,7 +39,7 @@ const user_Controller = new userController();
 
 //access to all the files in views folder. we are using this only to access the css file   ---->>  server.use(express.static("src/views"));
 
-server.get("/", auth, productController.getProducts);
+server.get("/", auth, setLastVisit, productController.getProducts);
 server.get("/new", auth, productController.getAddForm);
 server.get("/update-product/:id", auth, productController.getUpdateProductView);
 server.post("/delete-product/:id", auth, productController.deleteProduct);

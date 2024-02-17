@@ -1,6 +1,6 @@
 .header {
-    background-color: darkorchid;
-    color: lightgoldenrodyellow;
+    color: rgb(255, 255, 162);
+    text-align: center;
 }
 body {
     background-image: linear-gradient(
