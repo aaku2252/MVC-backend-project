@@ -6,10 +6,16 @@ export default class ProductController {
         let products = ProductModel.get();
         //we can also use --> res.render("products", { products: products });
 
-        res.render("products.ejs", { products: products });
+        res.render("products.ejs", {
+            products: products,
+            userEmail: req.session.userEmail,
+        });
     }
     getAddForm(req, res) {
-        res.render("new-product.ejs", { errorMessage: null });
+        res.render("new-product.ejs", {
+            errorMessage: null,
+            userEmail: req.session.userEmail,
+        });
     }
 
     addNewProduct(req, res) {
@@ -33,6 +39,7 @@ export default class ProductController {
             res.render("update-product.ejs", {
                 product: productFound,
                 errorMessage: null,
+                userEmail: req.session.userEmail,
             });
         } else {
             res.status(401).send("Product not found");

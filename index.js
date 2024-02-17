@@ -38,21 +38,24 @@ const user_Controller = new userController();
 
 server.get("/", auth, productController.getProducts);
 server.get("/new", auth, productController.getAddForm);
-server.get("/update-product/:id",auth, productController.getUpdateProductView);
+server.get("/update-product/:id", auth, productController.getUpdateProductView);
 server.post("/delete-product/:id", auth, productController.deleteProduct);
 server.post(
-    "/",auth,
+    "/",
+    auth,
     uploadFile.single("imageUrl"),
     validateRequest,
     productController.addNewProduct
 );
 server.get("/register", user_Controller.getRegister);
 server.get("/login", user_Controller.getLogin);
+server.get("/logout", user_Controller.getLogout);
 server.post("/register", user_Controller.postRegister);
 server.post("/login", user_Controller.userLogin);
 
 server.post(
-    "/update-product",auth,
+    "/update-product",
+    auth,
     uploadFile.single("imageUrl"),
     productController.postUpdateProduct
 );

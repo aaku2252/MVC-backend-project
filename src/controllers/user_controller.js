@@ -7,6 +7,7 @@ export default class userController {
     getLogin(req, res) {
         res.render("login.ejs", { errorMessage: null });
     }
+
     postRegister(req, res) {
         const { name, email, password } = req.body;
         UserModel.add(name, email, password);
@@ -23,5 +24,16 @@ export default class userController {
                 errorMessage: "Your credentials are incorrect.",
             });
         }
+    }
+
+    getLogout(req, res) {
+        // on logout destroy the session
+        req.session.destroy((err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.redirect("/login");
+            }
+        });
     }
 }
