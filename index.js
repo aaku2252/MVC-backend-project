@@ -54,7 +54,7 @@ server.get("/register", user_Controller.getRegister);
 server.get("/login", user_Controller.getLogin);
 server.get("/logout", user_Controller.getLogout);
 server.post("/register", user_Controller.postRegister);
-server.post("/login", user_Controller.userLogin);
+server.post("/login", setLastVisit, user_Controller.userLogin);
 
 server.post(
     "/update-product",

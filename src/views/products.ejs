@@ -2,6 +2,10 @@
 <div class="alert alert-info" role="alert">
     Time since Last Visit:<%=locals.lastVisit%>
 </div>
+<%}else{%>
+<div class="alert alert-info" role="alert">
+    Time since Last Visit:<%= new Date.now().toLocaleString%>
+</div>
 <%}%>
 <h1 class="mt-5 mb-4 header">Products</h1>
 <table class="table table-dark">
